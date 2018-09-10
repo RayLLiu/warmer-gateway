@@ -5,7 +5,7 @@ https:
   tls:
     "bubblehr.com":
         key: /root/ssl/warmer.today.key
-        cert: /root/ssl/warmer.today.crt
+        cert: /root/ssl/warmer.today.combined.pem
 apiEndpoints:
   api:
     host: warmer.today

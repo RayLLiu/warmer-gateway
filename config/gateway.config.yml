@@ -1,8 +1,17 @@
 http:
   port: 80
+https:
+  port: 443
+  tls:
+    "bubblehr.com":
+        key: /root/bubblehr.com.ssl/bubblehr.com.key
+        cert: /root/bubblehr.com.ssl/bubblehr.com.combined.pem
 apiEndpoints:
   api:
-    host: my.warmer.com
+    host: warmer.today
+    paths: '/*'
+  api1:
+    host: www.warmer.today
     paths: '/*'
 serviceEndpoints:
   httpbin:
@@ -14,6 +23,16 @@ pipelines:
   default:
     apiEndpoints:
       - api
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin
+              changeOrigin: false
+  default1:
+    apiEndpoints:
+      - api1
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
     # - key-auth:

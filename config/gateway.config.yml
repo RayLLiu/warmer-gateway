@@ -1,24 +1,15 @@
 http:
   port: 80
-admin:
-  port: 9876
-  hostname: localhost
 apiEndpoints:
   api:
-    host: localhost
-    paths: '/ip'
+    host: my.warmer.com
+    paths: '/*'
 serviceEndpoints:
   httpbin:
-    url: 'https://httpbin.org'
+    url: 'http://127.0.0.1:3000'
 policies:
-  - basic-auth
-  - cors
-  - expression
-  - key-auth
   - log
-  - oauth2
   - proxy
-  - rate-limit
 pipelines:
   default:
     apiEndpoints:
@@ -29,4 +20,4 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: httpbin
-              changeOrigin: true
+              changeOrigin: false

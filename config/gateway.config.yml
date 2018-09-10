@@ -29,6 +29,9 @@ pipelines:
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
     # - key-auth:
+      - expression:
+          - action:
+              jscode: if(req.protocol !== 'https') res.redirect(301,'https://' + req.headers.host + req.url);
       - proxy:
           - action:
               serviceEndpoint: httpbin
@@ -39,6 +42,9 @@ pipelines:
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
     # - key-auth:
+      - expression:
+          - action:
+              jscode: if(req.protocol !== 'https') res.redirect(301,'https://' + req.headers.host + req.url);
       - proxy:
           - action:
               serviceEndpoint: httpbin

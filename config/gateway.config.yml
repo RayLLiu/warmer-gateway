@@ -4,8 +4,8 @@ https:
   port: 443
   tls:
     "bubblehr.com":
-        key: /root/bubblehr.com.ssl/bubblehr.com.key
-        cert: /root/bubblehr.com.ssl/bubblehr.com.combined.pem
+        key: /root/ssl/warmer.today.key
+        cert: /root/ssl/warmer.today.crt
 apiEndpoints:
   api:
     host: warmer.today

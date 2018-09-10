@@ -20,8 +20,14 @@ serviceEndpoints:
   httpbin:
     url: 'http://127.0.0.1:3000'
 policies:
+#  - basic-auth
+  - cors
+  - expression
+#  - key-auth
   - log
+#  - oauth2
   - proxy
+  - rate-limit
 pipelines:
   default:
     apiEndpoints:

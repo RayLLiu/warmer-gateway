@@ -1,22 +1,31 @@
 http:
   port: 80
-admin:
-  port: 9876
-  hostname: localhost
+https:
+  port: 443
+  tls:
+    "warmer.today":
+        key: /root/ssl/warmer.today.key
+        cert: /root/ssl/warmer.today.combined.pem
+    "www.warmer.today":
+        key: /root/ssl/warmer.today.key
+        cert: /root/ssl/warmer.today.combined.pem
 apiEndpoints:
   api:
-    host: localhost
-    paths: '/ip'
+    host: warmer.today
+    paths: '/*'
+  api1:
+    host: www.warmer.today
+    paths: '/*'
 serviceEndpoints:
   httpbin:
-    url: 'https://httpbin.org'
+    url: 'http://127.0.0.1:3000'
 policies:
-  - basic-auth
+#  - basic-auth
   - cors
   - expression
-  - key-auth
+#  - key-auth
   - log
-  - oauth2
+#  - oauth2
   - proxy
   - rate-limit
 pipelines:
@@ -26,7 +35,23 @@ pipelines:
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
     # - key-auth:
+      - expression:
+          - action:
+              jscode: if(req.protocol !== 'https') res.redirect(301,'https://' + req.headers.host + req.url);
       - proxy:
           - action:
               serviceEndpoint: httpbin
-              changeOrigin: true
+              changeOrigin: false
+  default1:
+    apiEndpoints:
+      - api1
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - expression:
+          - action:
+              jscode: if(req.protocol !== 'https') res.redirect(301,'https://' + req.headers.host + req.url);
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin
+              changeOrigin: false

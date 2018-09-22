@@ -3,18 +3,12 @@ http:
 https:
   port: 443
   tls:
-    "warmer.today":
-        key: /root/ssl/warmer.today.key
-        cert: /root/ssl/warmer.today.combined.pem
-    "www.warmer.today":
-        key: /root/ssl/warmer.today.key
-        cert: /root/ssl/warmer.today.combined.pem
+    "my.warmer.com":
+        key: /Users/rayliu/Desktop/key.pem
+        cert: /Users/rayliu/Desktop/cert.pem
 apiEndpoints:
   api:
-    host: warmer.today
-    paths: '/*'
-  api1:
-    host: www.warmer.today
+    host: my.warmer.com
     paths: '/*'
 serviceEndpoints:
   httpbin:
